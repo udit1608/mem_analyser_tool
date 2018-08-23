@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<DUMP>
+    <I2C endianess="LE">
+        <IBCR size="8" offset="2h">
+            <RESERVED description="Default value is 0." Value="11" />
+            <RSTA description="Always read as 0." Value="0" />
+            <NOACK description="Data acknowledgement" Value="1">
+                <V1>No acknowledge signal response is sent</V1>
+            </NOACK>
+            <TXRX description="Transmit receive select" Value="0">
+                <V0>Receive mode selected.</V0>
+            </TXRX>
+            <MSSL description="Master slave mode select" Value="1">
+                <V1>Master mode selected.</V1>
+            </MSSL>
+            <IBIE description="IBus Interrupt enable" Value="1">
+                <V1>Interupts are enabled.</V1>
+            </IBIE>
+            <MDIS description="Module disable" Value="1">
+                <V1>Module is disabled.</V1>
+            </MDIS>
+        </IBCR>
+    </I2C>
+    <I2C endianess="LE">
+        <IBAD size="8" offset="0h">
+            <RESERVED description="Always 0. Readonly" Value="1" />
+            <ADR description="Slave address to be specified for I2C module" Value="1111111">
+                <V1111111>Slave Address set</V1111111>
+            </ADR>
+        </IBAD>
+    </I2C>
+    <I2C endianess="LE">
+        <IBFD size="8" offset="1h">
+            <IBC description="Used to prescale the bus clock" Value="00001000">
+                <V00001000>Clock rate set</V00001000>
+            </IBC>
+        </IBFD>
+    </I2C>
+</DUMP>

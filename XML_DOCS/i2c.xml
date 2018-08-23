@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<I2C endianess="LE">
+    <IBAD size="8" offset="0h">
+        <RESERVED start="0" end="0" width="1" type="RO" description="Always 0. Readonly" />
+        <ADR start = "1" end="7" width="7" type="RW" description="Slave address to be specified for I2C module">
+            <XX>Slave Address set</XX>
+        </ADR>
+    </IBAD>
+    <IBFD size="8" offset="1h">
+        <IBC start="0" end="7" width="8" type="RW" description="Used to prescale the bus clock">
+            <XX>Clock rate set</XX>
+        </IBC>
+    </IBFD>
+    <IBCR size="8" offset="2h">
+        <RESERVED start="0" end="1" width="2" type="RO" description="Default value is 0." />
+        <RSTA start="2" end="2" width="1" type="RO" description="Always read as 0." />
+        <NOACK start="3" end="3" width="1" type="RW" description="Data acknowledgement">
+            <V0> An acknowledge signal will be sent</V0>
+            <V1> No acknowledge signal response is sent </V1>
+        </NOACK>
+        <TXRX start="4" end="4" width="1" type="RW" description="Transmit receive select">
+            <V0>Receive mode selected.</V0>
+            <V1>Transmit mode selected.</V1>    
+        </TXRX>
+         <MSSL start="5" end="5" width = "1" type="RW" description="Master slave mode select">
+            <V0>Slave mode selected.</V0>
+            <V1>Master mode selected.</V1>    
+        </MSSL>
+        <IBIE start="6" end="6" width = "1" type="RW" description="IBus Interrupt enable">
+            <V0>Interupts are disabled.</V0>
+            <V1>Interupts are enabled.</V1>    
+        </IBIE>
+        <MDIS start="7" end="7" width = "1" type="RW" description="Module disable">
+            <V0>Module is enabled.</V0>
+            <V1>Module is disabled.</V1>    
+        </MDIS>
+    </IBCR>
+</I2C>
+

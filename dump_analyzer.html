@@ -1,0 +1,224 @@
+<html>    
+<head>
+
+<meta charset="UTF-8" />
+<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  -->
+
+<!-- CSS Files  -->
+<style>
+@font-face {
+	font-weight: normal;
+	font-style: normal;
+}
+/* CSS reset */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { 
+margin:0;
+padding:0;
+}
+html,body {
+margin:0;
+padding:0;
+height: 100%;
+}
+h1,h2,h3,h4,h5,h6 {
+	font-size:100%;
+	font-weight:normal;
+}
+body{
+width: 100%;
+height: 100%;
+	font-family: Cambria, Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+	background-color: #D0D3D4;
+	font-weight: 400;
+	font-size: 15px;
+color: #1d3c41;
+}
+
+.container{
+width: 100%;
+height: 100%;
+position: relative;
+	  text-align: left;
+}
+.container > header{
+padding: 20px 30px 10px 30px;
+margin: 0px 20px 10px 20px;
+position: relative;
+display: block;
+text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+text-align: center;
+}
+.container > header h1{
+	font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
+	font-size: 35px;
+	line-height: 35px;
+position: relative;
+	  font-weight: 400;
+color: rgba(26,89,120,0.9);
+       text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+padding: 0px 0px 5px 0px;
+}
+.container > header h1 span{
+color: #7cbcd6;
+       text-shadow: 0px 1px 1px rgba(255,255,255,0.8);
+}
+/* Header Style */
+
+#footer1
+{
+clear:both;
+width:100%;
+color:black;
+      text-align:center;
+position: fixed;
+
+bottom: 3%;
+}
+table,th,td {
+  border : 1px solid black;
+  border-collapse: collapse;
+  margin-left: 5px;
+}
+th,td {
+  padding: 5px;
+}
+.ta5 {
+	border: 1.5px solid #979A9A;
+	border-radius: 5px;
+	overflow: scroll;
+	float:left;
+	margin-left:10px;
+	margin-right:2px;
+}
+.btn {
+    background-color: #4D5656;
+    border: none;
+    color: white;
+    padding: 12px 16px;
+    font-size: 16px;
+     margin-left:10px;
+     margin-top:250px;
+    cursor: pointer;
+}
+.btn:hover {
+    background-color: RoyalBlue;
+}
+
+.divi{
+
+	background-color: #FDFEFE;
+	overflow: scroll;
+	width: 694px;
+	height: 527px;
+	float: right;
+	border: 1.5px solid #979A9A;
+        border-radius: 5px;
+	text-align: left;
+     margin-right:10px;
+}
+.divi1{
+
+	 background-color: #FDFEFE;
+        overflow: auto;
+        width: 694px;
+        height: 100px;
+        float: right;
+        border: 1.5px solid #979A9A;
+        border-radius: 5px;
+        text-align: left;
+     margin-right:10px;
+
+}
+
+</style> 
+</head>
+<script>
+function displaydetails(i,j) {
+	var id = "reg_details";
+	
+	document.getElementById(id).innerHTML = "";
+	var parser, xmlDoc;
+	var doc = document.getElementById("myTextarea").value;
+	var newTemp = doc.replace(/"/g, '\'');
+	newTemp = newTemp.replace(/\s\s+/g, '');
+	newTemp = newTemp.replace(/(\r\n|\n|\r)/gm,"");
+	parser = new DOMParser();
+	xmlDoc = parser.parseFromString(newTemp,"text/xml");
+	var x = xmlDoc.getElementsByTagName("DUMP");
+	var name = x[0].childNodes[i].childNodes[0].childNodes[j].nodeName;
+	var description = x[0].childNodes[i].childNodes[0].childNodes[j].getAttribute('description');
+	var Value = x[0].childNodes[i].childNodes[0].childNodes[j].getAttribute('Value');
+	var display_text = "Field Name: "+name+"<br>Description: "+description+"<br>Value fetched: "+Value;
+
+	var num_inference  = x[0].childNodes[i].childNodes[0].childNodes[j].childNodes.length;
+	if(num_inference != 0) {
+		var inf =  x[0].childNodes[i].childNodes[0].childNodes[j].childNodes[0].childNodes[0].nodeValue;
+		display_text = display_text + "<br>Inference: "+inf
+	}
+	document.getElementById(id).innerHTML = display_text;
+}
+
+function myFunction() {
+	var parser, xmlDoc;
+
+	var x = document.getElementById("myTextarea").value;
+	var newTemp = x.replace(/"/g, '\'');
+	newTemp = newTemp.replace(/\s\s+/g, '');
+	newTemp = newTemp.replace(/(\r\n|\n|\r)/gm,"");
+	
+	parser = new DOMParser();
+	xmlDoc = parser.parseFromString(newTemp,"text/xml");
+
+	var x = xmlDoc.getElementsByTagName("DUMP");
+	if(x.length == 0 ) {
+		document.getElementById("demo").innerHTML = "<b><center>Seems dump is not in correct format</center></b>";
+		return;
+	}
+	var node_length = x[0].childNodes.length;
+	var mod = "<tr bgcolor='#F1C40F'><td>Module</td><td>Register</td><td>Fields</td></tr>";	
+	for (i = 0; i < node_length; i++) {
+
+// x[0].childNodes[i] gives the register further .childNodes[0] givs the register and further .childNodes[j] gives field_name
+		var bit_num = x[0].childNodes[i].childNodes[0].childNodes.length;
+		var t_mod = x[0].childNodes[i].nodeName;
+		var reg_name = x[0].childNodes[i].childNodes[0].nodeName;
+		mod = mod + "<tr><td rowspan='"+(bit_num+1)+"'>"+t_mod+"</td><td rowspan='"+(bit_num+1)+"'>"+reg_name +"</td></tr>";
+		var bit_details = "";
+	
+			for (j = 0; j < bit_num; j++){
+				var temp_bit_details = x[0].childNodes[i].childNodes[0].childNodes[j].nodeName;
+				bit_details = bit_details + "<tr onclick='displaydetails(" + i + "," + j +")'><td>"+ temp_bit_details+"</td></tr>";
+ 
+			}
+		mod = mod + bit_details;
+		}
+	document.getElementById("demo").innerHTML = mod;
+}
+</script>
+<body>
+
+<div class="container">
+
+<div class="codrops-top">
+<!-- Image Of freescale login-->
+<div class="clr">
+</div>
+</div>
+<header>
+<h1>ANALYSE MEMORY DUMP</h1>
+</header>
+<section>				
+<textarea class="ta5" id="myTextarea" rows="41" cols="95" placeholder="Enter your text here"></textarea 
+</section>
+<div class="divi" title="XML Text"><h3><b><center>Register dumps<b>: For details click on the registers</center></h3>
+<br>
+<table id="demo" width="400"></table><br>
+</div><br><div class = "divi1"<p id="reg_details"></p></div>
+<button class="btn" onclick="myFunction()">Analyse</button>
+
+<div id="footer1" style="text_align:center">
+         &copy 2018 All rights reserved.
+</div>
+
+</body>
+</html>

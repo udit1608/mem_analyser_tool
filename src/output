@@ -1,0 +1,50 @@
+#########Start#######
+
+Parsing data from file: input_file
+	 Line number: 4 not in specified format. Skipping it.
+	 Warning!! Endianess in input file differs from default endianess for module I2C
+	 Module Name: I2C
+		 IBAD[RESERVED] : 1
+			 Description: Always 0. Readonly
+
+		 IBAD[ADR] : 1101011
+			 Description: Slave address to be specified for I2C module
+			 Inference  : Slave Address set
+
+
+	 Module Name: I2C
+		 IBFD[IBC] : 11111111
+			 Description: Used to prescale the bus clock
+			 Inference  : Clock rate set
+
+
+	 Module Name: I2C
+		 IBCR[RESERVED] : 00
+			 Description: Default value is 0.
+
+		 IBCR[RSTA] : 0
+			 Description: Always read as 0.
+
+		 IBCR[NOACK] : 1
+			 Description: Data acknowledgement
+			 Inference  : No acknowledge signal response is sent
+
+		 IBCR[TXRX] : 0
+			 Description: Transmit receive select
+			 Inference  : Receive mode selected.
+
+		 IBCR[MSSL] : 0
+			 Description: Master slave mode select
+			 Inference  : Slave mode selected.
+
+		 IBCR[IBIE] : 0
+			 Description: IBus Interrupt enable
+			 Inference  : Interupts are disabled.
+
+		 IBCR[MDIS] : 0
+			 Description: Module disable
+			 Inference  : Module is enabled.
+
+
+
+#########Done#######
